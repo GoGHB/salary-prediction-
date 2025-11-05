@@ -198,9 +198,16 @@ class DataProcessor:
         numpy.ndarray
             Transformed data
         """
+        # Make a copy to avoid modifying original
+        df = df.copy()
+        
         # Encode categorical variables
         if categorical_columns:
             df = self.encode_categorical(df, categorical_columns, fit=False)
+        
+        # Ensure columns are in the same order as training
+        if self.feature_names is not None:
+            df = df[self.feature_names]
         
         # Scale features
         X_scaled = self.scale_features(df, fit=False)

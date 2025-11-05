@@ -8,12 +8,24 @@ __author__ = "IBM Salary Prediction Team"
 
 from .data_processor import DataProcessor
 from .model import SalaryPredictor
-from .utils import load_config, save_model, load_model
+from .utils import (
+    load_config,
+    save_config,
+    save_model,
+    load_model,
+    calculate_salary_range,
+    format_currency,
+    validate_input_data
+)
 
 __all__ = [
     'DataProcessor',
     'SalaryPredictor',
     'load_config',
+    'save_config',
     'save_model',
-    'load_model'
+    'load_model',
+    'calculate_salary_range',
+    'format_currency',
+    'validate_input_data'
 ]
