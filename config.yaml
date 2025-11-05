@@ -1,0 +1,103 @@
+# Configuration file for Salary Prediction Model
+
+# Data settings
+data:
+  raw_data_path: "data/raw/salary_data.csv"
+  processed_data_path: "data/processed/processed_salary_data.csv"
+  target_column: "salary"
+  test_size: 0.2
+  random_state: 42
+  
+  # Categorical columns to encode
+  categorical_columns:
+    - education_level
+    - job_title
+    - location
+    - company_size
+    - industry
+
+# Model settings
+model:
+  type: "random_forest"  # Options: linear, ridge, lasso, random_forest, gradient_boosting
+  random_state: 42
+  
+  # Random Forest parameters
+  random_forest:
+    n_estimators: 100
+    max_depth: 20
+    min_samples_split: 5
+    min_samples_leaf: 2
+    max_features: "sqrt"
+  
+  # Gradient Boosting parameters
+  gradient_boosting:
+    n_estimators: 100
+    learning_rate: 0.1
+    max_depth: 5
+    min_samples_split: 5
+    min_samples_leaf: 2
+  
+  # Ridge regression parameters
+  ridge:
+    alpha: 1.0
+  
+  # Lasso regression parameters
+  lasso:
+    alpha: 1.0
+
+# Training settings
+training:
+  scale_features: true
+  cross_validation_folds: 5
+  perform_hyperparameter_tuning: false
+  
+  # Hyperparameter tuning grid (for GridSearchCV)
+  param_grid:
+    random_forest:
+      n_estimators: [50, 100, 200]
+      max_depth: [10, 20, 30]
+      min_samples_split: [2, 5, 10]
+    gradient_boosting:
+      n_estimators: [50, 100, 200]
+      learning_rate: [0.01, 0.1, 0.2]
+      max_depth: [3, 5, 7]
+
+# Paths
+paths:
+  models_dir: "models"
+  model_filename: "salary_prediction_model.pkl"
+  metrics_filename: "model_metrics.json"
+  plots_dir: "plots"
+
+# Feature engineering
+features:
+  # Features to use for training
+  numerical_features:
+    - years_experience
+  
+  categorical_features:
+    - education_level
+    - job_title
+    - location
+    - company_size
+    - industry
+
+# Evaluation settings
+evaluation:
+  metrics:
+    - mse
+    - rmse
+    - mae
+    - r2
+  
+  generate_plots: true
+  plot_types:
+    - feature_importance
+    - predictions_vs_actual
+    - residuals
+
+# Logging settings
+logging:
+  level: "INFO"
+  log_to_file: false
+  log_file: "logs/training.log"
