@@ -1,0 +1,11 @@
+# --- Core app framework ---
+streamlit
+
+# --- ML / data processing ---
+scikit-learn
+joblib
+numpy
+pandas
+
+# --- Optional (for date handling & compatibility) ---
+python-dateutil
