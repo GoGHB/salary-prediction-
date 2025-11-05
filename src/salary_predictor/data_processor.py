@@ -71,7 +71,9 @@ class DataProcessor:
         categorical_columns = df.select_dtypes(include=['object']).columns
         for col in categorical_columns:
             if df[col].isnull().any():
-                df[col] = df[col].fillna(df[col].mode()[0])
+                mode_val = df[col].mode()
+                fill_value = mode_val[0] if len(mode_val) > 0 else 'Unknown'
+                df[col] = df[col].fillna(fill_value)
         
         print(f"Data cleaned. Shape after cleaning: {df.shape}")
         return df

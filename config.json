@@ -9,6 +9,10 @@
             "location",
             "education_level"
         ],
+        "numerical_columns": [
+            "years_of_experience",
+            "age"
+        ],
         "test_size": 0.2,
         "random_state": 42
     },
@@ -22,18 +26,6 @@
             "random_state": 42
         },
         "save_path": "models/salary_predictor.joblib"
-    },
-    "features": {
-        "numerical": [
-            "years_of_experience",
-            "age"
-        ],
-        "categorical": [
-            "job_title",
-            "company",
-            "location",
-            "education_level"
-        ]
     },
     "preprocessing": {
         "handle_missing": true,
