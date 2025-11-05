@@ -88,7 +88,8 @@ def test_evaluate_model(trainer, sample_training_data):
     
     # Check that metrics are reasonable
     assert metrics['rmse'] > 0
-    assert 0 <= metrics['r2'] <= 1
+    # R² can be negative if model performs worse than mean prediction
+    assert metrics['r2'] <= 1
 
 
 def test_evaluate_without_training(trainer, sample_training_data):

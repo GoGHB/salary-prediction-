@@ -278,16 +278,17 @@ def create_sample_data(n_samples: int = 1000,
     Returns:
         DataFrame with sample data
     """
-    np.random.seed(random_state)
+    # Use modern numpy random generator for better isolation
+    rng = np.random.default_rng(random_state)
     
     # Generate features
     data = {
-        'years_experience': np.random.randint(0, 30, n_samples),
-        'education_level': np.random.choice(['Bachelor', 'Master', 'PhD'], n_samples),
-        'job_title': np.random.choice(['Junior', 'Mid-Level', 'Senior', 'Lead'], n_samples),
-        'location': np.random.choice(['New York', 'San Francisco', 'Austin', 'Seattle', 'Boston'], n_samples),
-        'company_size': np.random.choice(['Small', 'Medium', 'Large'], n_samples),
-        'industry': np.random.choice(['Tech', 'Finance', 'Healthcare', 'Retail'], n_samples)
+        'years_experience': rng.integers(0, 30, n_samples),
+        'education_level': rng.choice(['Bachelor', 'Master', 'PhD'], n_samples),
+        'job_title': rng.choice(['Junior', 'Mid-Level', 'Senior', 'Lead'], n_samples),
+        'location': rng.choice(['New York', 'San Francisco', 'Austin', 'Seattle', 'Boston'], n_samples),
+        'company_size': rng.choice(['Small', 'Medium', 'Large'], n_samples),
+        'industry': rng.choice(['Tech', 'Finance', 'Healthcare', 'Retail'], n_samples)
     }
     
     df = pd.DataFrame(data)
@@ -316,7 +317,7 @@ def create_sample_data(n_samples: int = 1000,
     salary += title_bonus
     
     # Add random noise
-    salary += np.random.normal(0, 10000, n_samples)
+    salary += rng.normal(0, 10000, n_samples)
     
     # Ensure no negative salaries
     salary = np.maximum(salary, 30000)
